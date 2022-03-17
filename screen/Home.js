@@ -13,13 +13,17 @@ import {
 } from "react-native";
 import { Card } from "react-native-paper";
 import { AntDesign, FontAwesome } from "@expo/vector-icons";
+
+
+
+
 const dataURL = "https://gh-trending-api.herokuapp.com/repositories";
 
 export default function Home() {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
-  const [image, setImage] = useState([]);
   const [networkError, setNetworkError] = useState(false);
+  const [expanded, setExpanded] = useState(false);
 
   const fetchData = () => {
     fetch(dataURL)
@@ -118,7 +122,12 @@ export default function Home() {
                   <Card style={styles.card}>
                     <View style={styles.cardView}>
                       <Image
-                        style={{ width: 60, height: 60, borderRadius: 50, resizeMode: 'cover' }}
+                        style={{
+                          width: 60,
+                          height: 60,
+                          borderRadius: 50,
+                          resizeMode: "cover",
+                        }}
                         source={{
                           uri: item.builtBy[0].avatar,
                         }}
@@ -129,20 +138,25 @@ export default function Home() {
                         <Text style={styles.text}>{item.repositoryName}</Text>
                       </View>
 
-                      <View
+                      {/* <View
                         style={{
-                          justifyContent: "space-evenly",
+                          flexWrap: 'wrap',
                           flexDirection: "row",
                           alignItems: "center",
                         }}
                       >
-                        <FontAwesome name="circle" size={14} color={item.languageColor} />
+                        <Text>{item.url}</Text>
+                        <FontAwesome
+                          name="circle"
+                          size={14}
+                          color={item.languageColor}
+                        />
                         <Text>hey</Text>
                         <AntDesign name="star" size={14} color="#FFA500" />
                         <Text>{item.totalStars}</Text>
                         <AntDesign name="fork" size={14} color="black" />
                         <Text>{item.forks}</Text>
-                      </View>
+                      </View> */}
                     </View>
                   </Card>
                 </TouchableOpacity>
@@ -174,31 +188,3 @@ const styles = StyleSheet.create({
 });
 
 const { width, height } = Dimensions.get("window");
-
-//   const data = [
-//     { id: 1, name: "mukesh", position: "web dev" },
-//     { id: 2, name: "mukesh", position: "web development" },
-//     { id: 3, name: "mukesh", position: "web dev" },
-//     { id: 4, name: "mukesh", position: "web dev" },
-//     { id: 5, name: "mukesh", position: "web dev" },
-//     { id: 6, name: "mukesh", position: "web dev" },
-//     { id: 7, name: "mukesh", position: "web dev" },
-//     { id: 8, name: "mukesh", position: "web dev" },
-//     { id: 9, name: "mukesh", position: "web dev" },
-//     { id: 10, name: "mukesh", position: "web dev" },
-//   ];
-
-//   <Card style={styles.card}>
-//   <View style={styles.cardView}>
-//     <Image
-//       style={{ width: 60, height: 60, borderRadius: 50 }}
-//       source={{
-//         uri: "https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
-//       }}
-//     />
-//     <View style={{ justifyContent: "space-between" }}>
-//       <Text style={styles.text}> Name </Text>
-//       <Text style={styles.text}> Position </Text>
-//     </View>
-//   </View>
-// </Card>
