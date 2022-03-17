@@ -6,9 +6,10 @@ import {
   View,
   Image,
   FlatList,
-  ScrollView,
   ActivityIndicator,
   SafeAreaView,
+  Dimensions,
+  TouchableOpacity,
 } from "react-native";
 import { Card } from "react-native-paper";
 
@@ -18,29 +19,21 @@ export default function Home() {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
   const [image, setImage] = useState([]);
-
-  //   async function getMoviesAsync() {
-  //     try {
-  //       let response = await fetch(movieURL);
-  //       let json = await response.json();
-  //       setData(json.movies);
-  //       setTitle(json.title);
-  //       setDescription(json.description);
-  //       setLoading(false);
-  //     } catch (error) {
-  //       alert(error);
-  //     }
-  //   }
+  const [networkError, setNetworkError] = useState(false);
 
   const fetchData = () => {
     fetch(movieURL)
       .then((response) => response.json()) // get response, convert to json
       .then((json) => {
         console.log("refreshed");
+
         setData(json);
         // setImage(json.builtBy)
       })
-      .catch((error) => alert(error)) // display errors
+      .catch((error) => {
+        console.log("list error", error);
+        setNetworkError(error);
+      }) // display errors
       .finally(() => setLoading(false)); // change loading state
   };
 
@@ -50,7 +43,54 @@ export default function Home() {
 
   return (
     <SafeAreaView>
-      {isLoading ? (
+      {networkError ? (
+        <View>
+          <View
+            style={{
+              paddingHorizontal: 10,
+              alignSelf: "center",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "space-between",
+            }}
+          >
+            <Image style={{ width: width * 0.8, height: height * 0.6, resizeMode: 'contain' }}
+            source={require('../assets/networkerror.jpg')}/>
+
+            <Text
+              style={{
+                fontSize: 20,
+                fontWeight: "bold",
+                color: "#383838",
+              }}
+            >
+              Something went wrong..
+            </Text>
+            <Text
+              style={{ textAlign: "center", fontSize: 18, color: "#989898" }}
+            >
+              An alien is probably blocking your signal.
+            </Text>
+          </View>
+          <TouchableOpacity onPress={() => fetchData()}>
+            <View
+              style={{
+                justifyContent: "center",
+                alignContent: "center",
+                borderWidth: 1,
+                borderColor: "green",
+                padding: 15,
+                marginLeft: 15,
+                marginRight: 15,
+                borderRadius: 5,
+                marginTop: height * 0.15,
+              }}
+            >
+              <Text style={{ alignSelf: "center", color: "green" }}>RETRY</Text>
+            </View>
+          </TouchableOpacity>
+        </View>
+      ) : isLoading ? (
         <View
           style={{
             flex: 1,
@@ -109,6 +149,8 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
 });
+
+const { width, height } = Dimensions.get("window");
 
 //   const data = [
 //     { id: 1, name: "mukesh", position: "web dev" },
