@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "Kutumb_app_android",
+    "slug": "Kutumb_app_android",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  },
+  "name": "Kutumb_app_android"
+}
