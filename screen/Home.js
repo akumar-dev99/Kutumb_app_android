@@ -12,8 +12,8 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { Card } from "react-native-paper";
-
-const movieURL = "https://gh-trending-api.herokuapp.com/repositories";
+import { AntDesign, FontAwesome } from "@expo/vector-icons";
+const dataURL = "https://gh-trending-api.herokuapp.com/repositories";
 
 export default function Home() {
   const [isLoading, setLoading] = useState(true);
@@ -22,11 +22,11 @@ export default function Home() {
   const [networkError, setNetworkError] = useState(false);
 
   const fetchData = () => {
-    fetch(movieURL)
+    fetch(dataURL)
       .then((response) => response.json()) // get response, convert to json
       .then((json) => {
         console.log("refreshed");
-
+        console.log(json);
         setData(json);
         // setImage(json.builtBy)
       })
@@ -54,8 +54,14 @@ export default function Home() {
               justifyContent: "space-between",
             }}
           >
-            <Image style={{ width: width * 0.8, height: height * 0.6, resizeMode: 'contain' }}
-            source={require('../assets/networkerror.jpg')}/>
+            <Image
+              style={{
+                width: width * 0.8,
+                height: height * 0.6,
+                resizeMode: "contain",
+              }}
+              source={require("../assets/networkerror.jpg")}
+            />
 
             <Text
               style={{
@@ -107,22 +113,39 @@ export default function Home() {
             data={data}
             keyExtractor={({ id }, index) => id}
             renderItem={({ item }) => (
-              <View style={{ paddingBottom: 10 }}>
-                <Card style={styles.card}>
-                  <View style={styles.cardView}>
-                    <Image
-                      style={{ width: 60, height: 60, borderRadius: 50 }}
-                      source={{
-                        uri: item.avatar,
-                      }}
-                    />
+              <View>
+                <TouchableOpacity>
+                  <Card style={styles.card}>
+                    <View style={styles.cardView}>
+                      <Image
+                        style={{ width: 60, height: 60, borderRadius: 50, resizeMode: 'cover' }}
+                        source={{
+                          uri: item.builtBy[0].avatar,
+                        }}
+                      />
 
-                    <View style={{ justifyContent: "space-between" }}>
-                      <Text style={styles.text}>{item.username}</Text>
-                      <Text style={styles.text}>{item.repositoryName}</Text>
+                      <View style={{ justifyContent: "space-between" }}>
+                        <Text style={styles.text}>{item.username}</Text>
+                        <Text style={styles.text}>{item.repositoryName}</Text>
+                      </View>
+
+                      <View
+                        style={{
+                          justifyContent: "space-evenly",
+                          flexDirection: "row",
+                          alignItems: "center",
+                        }}
+                      >
+                        <FontAwesome name="circle" size={14} color={item.languageColor} />
+                        <Text>hey</Text>
+                        <AntDesign name="star" size={14} color="#FFA500" />
+                        <Text>{item.totalStars}</Text>
+                        <AntDesign name="fork" size={14} color="black" />
+                        <Text>{item.forks}</Text>
+                      </View>
                     </View>
-                  </View>
-                </Card>
+                  </Card>
+                </TouchableOpacity>
               </View>
             )}
             onRefresh={() => fetchData()}
