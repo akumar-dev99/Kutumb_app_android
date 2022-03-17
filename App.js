@@ -1,11 +1,10 @@
-import { StatusBar } from "expo-status-bar";
 import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import Contants from "expo-constants";
 import Home from "./screen/Home";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import { AntDesign, Entypo, FontAwesome } from "@expo/vector-icons";
+import { Entypo } from "@expo/vector-icons";
 
 const Stack = createStackNavigator();
 
@@ -20,6 +19,14 @@ function App() {
             headerShown: true,
             title: "Trending",
             headerTitleAlign: "center",
+            headerRight: () => (
+              <Entypo
+                style={{ marginRight: 15 }}
+                color={"black"}
+                name="dots-three-vertical"
+                size={15}
+              />
+            ),
           }}
         />
       </Stack.Navigator>

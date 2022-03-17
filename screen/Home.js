@@ -11,7 +11,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { Card } from "react-native-paper";
-import { AntDesign, FontAwesome, Entypo } from "@expo/vector-icons";
+import { AntDesign, FontAwesome } from "@expo/vector-icons";
 
 const dataURL = "https://gh-trending-api.herokuapp.com/repositories";
 
@@ -30,8 +30,7 @@ export default function Home(navigation) {
       .then((response) => response.json()) // get response, convert to json
       .then((json) => {
         console.log("refreshed");
-        setData(json.sdad.ss);
-        // setImage(json.builtBy)
+        setData(json);
       })
       .catch((error) => {
         console.log("list error", error);
@@ -171,8 +170,8 @@ export default function Home(navigation) {
               style={{
                 justifyContent: "center",
                 alignContent: "center",
-                borderWidth: 1.2,
-                borderColor: "#008000",
+                borderWidth: 1,
+                borderColor: "green",
                 padding: 15,
                 marginLeft: 15,
                 marginRight: 15,
@@ -180,7 +179,7 @@ export default function Home(navigation) {
                 marginTop: height * 0.15,
               }}
             >
-              <Text style={{ alignSelf: "center", color: "#008000" }}>RETRY</Text>
+              <Text style={{ alignSelf: "center", color: "green" }}>RETRY</Text>
             </View>
           </TouchableOpacity>
         </View>
