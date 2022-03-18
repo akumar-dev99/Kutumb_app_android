@@ -8,8 +8,6 @@ in order to run this,
 - clone the file and by entering inside the file using command prompt, type "npm install"
 - after all the dependencies are installed, expo start to run the application
 
-(https://user-images.githubusercontent.com/42837133/159042720-1545661e-ee98-499e-bb75-57390f483d79.jpeg)
--touchable feedback screenshot
 
 ![WhatsApp Image 2022-03-18 at 9 51 15 PM](https://user-images.githubusercontent.com/42837133/159042888-1d3bb837-65a8-4220-aaaf-f53bc064f23b.jpeg)
 -flatlist expanded screenshot
@@ -22,3 +20,7 @@ in order to run this,
 
 ![WhatsApp Image 2022-03-18 at 9 53 50 PM](https://user-images.githubusercontent.com/42837133/159043077-aaac8fb6-5fbd-4cfc-bb97-63b9e1f8c7ba.jpeg)
 -network error retry screenshot
+
+![WhatsApp Image 2022-03-18 at 9 53 51 PM](https://user-images.githubusercontent.com/42837133/159043253-9024d641-dc32-4c00-bcc5-0738b6f6d976.jpeg)
+
+-touchable feedback screenshot
